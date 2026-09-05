@@ -1,0 +1,36 @@
+class Solution {
+    public boolean checkValidGrid(int[][] grid) {
+        if(grid[0][0]!=0)
+        {
+            return false;
+        }
+    int n=grid.length;
+    int target=n*n-1;
+    int count=0;
+    boolean ans=check(grid, 0, 0, n, target, count);
+        return ans;
+    }
+
+    public boolean check(int[][] grid, int i, int j, int n, int target, int count)
+    {
+        if(i<0 || j<0 || i>=n || j>=n || grid[i][j]!=count)
+        {
+            return false;
+        }
+        if(count==target)
+    {
+        return true;
+    }
+            boolean ans1 =check(grid, i+1, j+2, n, target, count+1);
+            boolean ans2=check(grid, i+1, j-2, n, target, count+1);
+            boolean ans3=check(grid, i-2, j+1, n, target, count+1);
+            boolean ans4=check(grid, i+2, j+1, n, target, count+1);
+            boolean ans5=check(grid, i+2, j-1, n, target, count+1);
+           boolean ans6=check(grid, i-1, j-2, n, target, count+1);
+           boolean ans7=check(grid, i-1, j+2, n, target, count+1);
+           boolean ans8=check(grid, i-2, j-1, n, target, count+1);
+        
+
+        return ans1 ||ans2 ||ans3 ||ans4 ||ans5 ||ans6 ||ans7 ||ans8;
+    }
+}
