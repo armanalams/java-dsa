@@ -1,0 +1,27 @@
+class Solution {
+    public int mySqrt(int x) {
+        // Edge cases: if x is 0 or 1, the square root is x itself
+        if (x < 2) {
+            return x;
+        }
+        
+        int left = 1;
+        int right = x / 2; // The square root of x (for x >= 2) will never exceed x / 2
+        int ans = 0;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2; // Prevents overflow during mid calculation
+            
+            // Using division (x / mid) instead of multiplication (mid * mid) 
+            // completely avoids integer overflow problems.
+            if (mid <= x / mid) {
+                ans = mid;       // 'mid' is a potential valid answer, save it
+                left = mid + 1;  // Try to find a larger value closer to the real sqrt
+            } else {
+                right = mid - 1; // 'mid' is too large, search the lower half
+            }
+        }
+        
+        return ans;
+    }
+}
